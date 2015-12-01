@@ -65,6 +65,7 @@ module Gimbal
       build :set_up_factory_girl_for_rspec
       build :generate_rspec
       build :configure_rspec
+      build :enable_database_cleaner
       build :configure_spec_support_features
       build :configure_action_mailer_in_specs
     end

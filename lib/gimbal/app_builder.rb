@@ -24,6 +24,7 @@ module Gimbal
 
     def configure_spec_support_features
       empty_directory_with_keep_file 'spec/features'
+      empty_directory_with_keep_file 'spec/factories'
       empty_directory_with_keep_file 'spec/support/features'
     end
 
@@ -44,8 +45,16 @@ module Gimbal
       generate 'rspec:install'
     end
 
+    def enable_database_cleaner
+      copy_file 'database_cleaner_rspec.rb', 'spec/support/database_cleaner.rb'
+    end
+
     def set_up_factory_girl_for_rspec
       copy_file 'factory_girl_rspec.rb', 'spec/support/factory_girl.rb'
+    end
+
+    def generate_factories_file
+      copy_file "factories.rb", "spec/factories.rb"
     end
 
     def configure_rspec
