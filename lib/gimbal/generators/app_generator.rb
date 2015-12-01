@@ -57,11 +57,12 @@ module Gimbal
 
     def setup_development_environment
       say 'Setting up the development environment'
-
+      build :raise_on_delivery_errors
     end
 
     def setup_test_environment
       say 'Setting up the test environment'
+      build :raise_on_missing_assets_in_test
       build :set_up_factory_girl_for_rspec
       build :generate_rspec
       build :configure_rspec

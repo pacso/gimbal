@@ -18,6 +18,19 @@ module Gimbal
       run 'git init'
     end
 
+    def raise_on_missing_assets_in_test
+      inject_into_file(
+          "config/environments/test.rb",
+          "\n  config.assets.raise_runtime_errors = true",
+          after: "Rails.application.configure do",
+      )
+    end
+
+    def raise_on_delivery_errors
+      replace_in_file 'config/environments/development.rb',
+                      'raise_delivery_errors = false', 'raise_delivery_errors = true'
+    end
+
     def use_mysql_config_template
       template 'mysql_database.yml.erb', 'config/database.yml', force: true
     end
