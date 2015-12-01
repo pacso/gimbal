@@ -64,6 +64,7 @@ module Gimbal
       say 'Setting up the test environment'
       build :generate_rspec
       build :configure_rspec
+      build :configure_spec_support_features
     end
 
     def setup_production_environment

@@ -7,13 +7,13 @@ RSpec.describe "Create a new project with default config" do
     run_gimbal
   end
 
-  # it 'ensures project specs pass' do
-  #   Dir.chdir(project_path) do
-  #     Bundler.with_clean_env do
-  #       expect(`rake`).to include('0 failures')
-  #     end
-  #   end
-  # end
+  it 'ensures project specs pass' do
+    Dir.chdir(project_path) do
+      Bundler.with_clean_env do
+        expect(`rake`).to include('0 failures')
+      end
+    end
+  end
 
   it "creates .ruby-version from Gimbal .ruby-version" do
     ruby_version_file = IO.read("#{project_path}/.ruby-version")

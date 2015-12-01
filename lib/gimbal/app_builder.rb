@@ -22,6 +22,11 @@ module Gimbal
       template 'mysql_database.yml.erb', 'config/database.yml', force: true
     end
 
+    def configure_spec_support_features
+      empty_directory_with_keep_file 'spec/features'
+      empty_directory_with_keep_file 'spec/support/features'
+    end
+
     def gitignore_files
       remove_file '.gitignore'
       copy_file 'gimbal_gitignore', '.gitignore'
