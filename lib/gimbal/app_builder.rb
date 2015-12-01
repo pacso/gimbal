@@ -39,6 +39,23 @@ module Gimbal
       )
     end
 
+    def add_bullet_gem_configuration
+      config = <<-RUBY
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger = true
+  end
+
+      RUBY
+
+      inject_into_file(
+          "config/environments/development.rb",
+          config,
+          after: "config.action_mailer.delivery_method = :letter_opener\n",
+      )
+    end
+
     def use_mysql_config_template
       template 'mysql_database.yml.erb', 'config/database.yml', force: true
     end

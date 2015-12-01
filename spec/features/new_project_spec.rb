@@ -39,6 +39,14 @@ RSpec.describe "Create a new project with default config" do
                           )
   end
 
+  it "configs bullet gem in development" do
+    dev_config = IO.read("#{project_path}/config/environments/development.rb")
+
+    expect(dev_config).to match /^ +Bullet.enable = true$/
+    expect(dev_config).to match /^ +Bullet.bullet_logger = true$/
+    expect(dev_config).to match /^ +Bullet.rails_logger = true$/
+  end
+
   it "adds support file for action mailer" do
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
