@@ -60,6 +60,7 @@ module Gimbal
       build :raise_on_delivery_errors
       build :set_dev_mail_delivery_method
       build :add_bullet_gem_configuration
+      build :raise_on_unpermitted_parameters
     end
 
     def setup_test_environment

@@ -56,6 +56,14 @@ module Gimbal
       )
     end
 
+    def raise_on_unpermitted_parameters
+      config = <<-RUBY
+    config.action_controller.action_on_unpermitted_parameters = :raise
+      RUBY
+
+      inject_into_class "config/application.rb", "Application", config
+    end
+
     def use_mysql_config_template
       template 'mysql_database.yml.erb', 'config/database.yml', force: true
     end

@@ -47,6 +47,14 @@ RSpec.describe "Create a new project with default config" do
     expect(dev_config).to match /^ +Bullet.rails_logger = true$/
   end
 
+  it "raises on unpermitted parameters in all environments" do
+    result = IO.read("#{project_path}/config/application.rb")
+
+    expect(result).to match(
+                          /^ +config.action_controller.action_on_unpermitted_parameters = :raise$/
+                      )
+  end
+
   it "adds support file for action mailer" do
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
