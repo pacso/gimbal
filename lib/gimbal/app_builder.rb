@@ -44,6 +44,10 @@ module Gimbal
       generate 'rspec:install'
     end
 
+    def set_up_factory_girl_for_rspec
+      copy_file 'factory_girl_rspec.rb', 'spec/support/factory_girl.rb'
+    end
+
     def configure_rspec
       remove_file "spec/rails_helper.rb"
       remove_file "spec/spec_helper.rb"
