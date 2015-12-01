@@ -27,6 +27,10 @@ module Gimbal
       empty_directory_with_keep_file 'spec/support/features'
     end
 
+    def configure_action_mailer_in_specs
+      copy_file 'action_mailer.rb', 'spec/support/action_mailer.rb'
+    end
+
     def gitignore_files
       remove_file '.gitignore'
       copy_file 'gimbal_gitignore', '.gitignore'

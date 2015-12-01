@@ -15,6 +15,10 @@ RSpec.describe "Create a new project with default config" do
     end
   end
 
+  it "adds support file for action mailer" do
+    expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
+  end
+
   it "creates .ruby-version from Gimbal .ruby-version" do
     ruby_version_file = IO.read("#{project_path}/.ruby-version")
 

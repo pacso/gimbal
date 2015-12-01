@@ -65,6 +65,7 @@ module Gimbal
       build :generate_rspec
       build :configure_rspec
       build :configure_spec_support_features
+      build :configure_action_mailer_in_specs
     end
 
     def setup_production_environment
