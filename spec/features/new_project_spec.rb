@@ -39,6 +39,22 @@ RSpec.describe "Create a new project with default config" do
                           )
   end
 
+  it "configs development to raise on missing translations" do
+    dev_config = IO.read("#{project_path}/config/environments/development.rb")
+
+    expect(dev_config).to match(
+                              /^ +config.action_view.raise_on_missing_translations = true/,
+                          )
+  end
+
+  it "configs test to raise on missing translations" do
+    dev_config = IO.read("#{project_path}/config/environments/test.rb")
+
+    expect(dev_config).to match(
+                              /^ +config.action_view.raise_on_missing_translations = true/,
+                          )
+  end
+
   it "configs bullet gem in development" do
     dev_config = IO.read("#{project_path}/config/environments/development.rb")
 
@@ -55,6 +71,31 @@ RSpec.describe "Create a new project with default config" do
                       )
   end
 
+  it "configures generators" do
+    result = IO.read("#{project_path}/config/application.rb")
+
+    expect(result).to match(/^ +generate.helper false$/)
+    expect(result).to match(/^ +generate.javascript_engine false$/)
+    expect(result).to match(/^ +generate.request_specs false$/)
+    expect(result).to match(/^ +generate.routing_specs false$/)
+    expect(result).to match(/^ +generate.stylesheets false$/)
+    expect(result).to match(/^ +generate.test_framework :rspec/)
+    expect(result).to match(/^ +generate.view_specs false/)
+  end
+
+  it "configures language in html element" do
+    layout_path = "/app/views/layouts/application.html.erb"
+    layout_file = IO.read("#{project_path}#{layout_path}")
+    expect(layout_file).to match(/<html lang="en">/)
+  end
+
+  it "evaluates en.yml.erb" do
+    locales_en_file = IO.read("#{project_path}/config/locales/en.yml")
+    app_name = GimbalTestHelpers::APP_NAME
+
+    expect(locales_en_file).to match(/application: #{app_name.humanize}/)
+  end
+
   it "adds support file for action mailer" do
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
@@ -69,6 +110,18 @@ RSpec.describe "Create a new project with default config" do
 
   it "adds support file for database cleaner" do
     expect(File).to exist("#{project_path}/spec/support/shoulda_matchers.rb")
+  end
+
+  it "adds support file for i18n" do
+    expect(File).to exist("#{project_path}/spec/support/i18n.rb")
+  end
+
+  it "adds specs for missing or unused translations" do
+    expect(File).to exist("#{project_path}/spec/i18n_spec.rb")
+  end
+
+  it "configs i18n-tasks" do
+    expect(File).to exist("#{project_path}/config/i18n-tasks.yml")
   end
 
   it "creates .ruby-version from Gimbal .ruby-version" do

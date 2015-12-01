@@ -64,6 +64,38 @@ module Gimbal
       inject_into_class "config/application.rb", "Application", config
     end
 
+    def configure_generators
+      config = <<-RUBY
+
+    config.generators do |generate|
+      generate.helper false
+      generate.javascript_engine false
+      generate.request_specs false
+      generate.routing_specs false
+      generate.stylesheets false
+      generate.test_framework :rspec
+      generate.view_specs false
+    end
+
+      RUBY
+
+      inject_into_class 'config/application.rb', 'Application', config
+    end
+
+    def configure_i18n_for_missing_translations
+      raise_on_missing_translations_in("development")
+      raise_on_missing_translations_in("test")
+    end
+
+    def configure_i18n_for_test_environment
+      copy_file "i18n.rb", "spec/support/i18n.rb"
+    end
+
+    def configure_i18n_tasks
+      run "cp $(i18n-tasks gem-path)/templates/rspec/i18n_spec.rb spec/"
+      copy_file "config_i18n_tasks.yml", "config/i18n-tasks.yml"
+    end
+
     def use_mysql_config_template
       template 'mysql_database.yml.erb', 'config/database.yml', force: true
     end
@@ -89,6 +121,10 @@ module Gimbal
 
     def generate_rspec
       generate 'rspec:install'
+    end
+
+    def configure_puma
+      copy_file "puma.rb", "config/puma.rb"
     end
 
     def enable_database_cleaner
@@ -117,8 +153,32 @@ module Gimbal
       copy_file "spec_helper.rb", "spec/spec_helper.rb"
     end
 
+    def create_partials_directory
+      empty_directory 'app/views/application'
+    end
+
+    def create_shared_flashes
+      copy_file "_flashes.html.erb", "app/views/application/_flashes.html.erb"
+      copy_file "flashes_helper.rb", "app/helpers/flashes_helper.rb"
+    end
+
+    def create_shared_javascripts
+      copy_file '_javascript.html.erb', 'app/views/application/_javascript.html.erb'
+    end
+
+    def create_application_layout
+      template 'gimbal_layout.html.erb.erb',
+               'app/views/layouts/application.html.erb',
+               force: true
+    end
+
     def create_database
       bundle_command 'exec rake db:create db:migrate'
+    end
+
+    def configure_time_formats
+      remove_file "config/locales/en.yml"
+      template "config_locales_en.yml.erb", "config/locales/en.yml"
     end
 
     def create_github_repo(repo_name)
@@ -128,11 +188,10 @@ module Gimbal
     def setup_spring
       bundle_command "exec spring binstub --all"
     end
-  end
 
-  def setup_default_rake_task
-    append_file 'Rakefile' do
-      <<-EOS
+    def setup_default_rake_task
+      append_file 'Rakefile' do
+        <<-EOS
 task(:default).clear
 task default: [:spec]
 if defined? RSpec
@@ -141,7 +200,21 @@ if defined? RSpec
     t.verbose = false
   end
 end
-      EOS
+        EOS
+      end
+    end
+
+    def setup_bundler_audit
+      copy_file "bundler_audit.rake", "lib/tasks/bundler_audit.rake"
+      append_file "Rakefile", %{\ntask default: "bundler:audit"\n}
+    end
+
+    private
+
+    def raise_on_missing_translations_in(environment)
+      config = 'config.action_view.raise_on_missing_translations = true'
+
+      uncomment_lines("config/environments/#{environment}.rb", config)
     end
   end
 end

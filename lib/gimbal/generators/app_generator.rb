@@ -30,10 +30,12 @@ module Gimbal
       invoke :setup_development_environment
       invoke :setup_test_environment
       invoke :setup_production_environment
+      invoke :create_gimbal_views
       invoke :configure_app
       invoke :setup_git
       invoke :setup_database
       invoke :create_github_repo
+      invoke :setup_bundler_audit
       invoke :setup_spring
     end
 
@@ -61,6 +63,8 @@ module Gimbal
       build :set_dev_mail_delivery_method
       build :add_bullet_gem_configuration
       build :raise_on_unpermitted_parameters
+      build :configure_generators
+      build :configure_i18n_for_missing_translations
     end
 
     def setup_test_environment
@@ -72,6 +76,8 @@ module Gimbal
       build :enable_database_cleaner
       build :provide_shoulda_matchers_config
       build :configure_spec_support_features
+      build :configure_i18n_for_test_environment
+      build :configure_i18n_tasks
       build :configure_action_mailer_in_specs
     end
 
@@ -80,9 +86,19 @@ module Gimbal
 
     end
 
+    def create_gimbal_views
+      say 'Creating gimbal views'
+      build :create_partials_directory
+      build :create_shared_flashes
+      build :create_shared_javascripts
+      build :create_application_layout
+    end
+
     def configure_app
       say 'Configuring app'
+      build :configure_time_formats
       build :setup_default_rake_task
+      build :configure_puma
     end
 
     def setup_git
@@ -95,6 +111,11 @@ module Gimbal
 
     def setup_gitignore
       build :gitignore_files
+    end
+
+    def setup_bundler_audit
+      say "Setting up bundler-audit"
+      build :setup_bundler_audit
     end
 
     def setup_spring
