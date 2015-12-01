@@ -27,6 +27,10 @@ RSpec.describe "Create a new project with default config" do
     expect(File).to exist("#{project_path}/spec/support/database_cleaner.rb")
   end
 
+  it "adds support file for database cleaner" do
+    expect(File).to exist("#{project_path}/spec/support/shoulda_matchers.rb")
+  end
+
   it "creates .ruby-version from Gimbal .ruby-version" do
     ruby_version_file = IO.read("#{project_path}/.ruby-version")
 

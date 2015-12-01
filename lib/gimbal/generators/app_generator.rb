@@ -66,6 +66,7 @@ module Gimbal
       build :generate_rspec
       build :configure_rspec
       build :enable_database_cleaner
+      build :provide_shoulda_matchers_config
       build :configure_spec_support_features
       build :configure_action_mailer_in_specs
     end

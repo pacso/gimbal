@@ -57,6 +57,13 @@ module Gimbal
       copy_file "factories.rb", "spec/factories.rb"
     end
 
+    def provide_shoulda_matchers_config
+      copy_file(
+          "shoulda_matchers_config_rspec.rb",
+          "spec/support/shoulda_matchers.rb"
+      )
+    end
+
     def configure_rspec
       remove_file "spec/rails_helper.rb"
       remove_file "spec/spec_helper.rb"
