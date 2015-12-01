@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.description = <<-HERE
 Based on Suspenders from thoughtbot, Gimbal is a base Rails project I use
-to steamline the beginning of my Rails projects.
+to streamline the beginning of my Rails projects.
   HERE
 
   s.email = 'jon.pascoe@me.com'
