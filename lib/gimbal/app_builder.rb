@@ -31,6 +31,14 @@ module Gimbal
                       'raise_delivery_errors = false', 'raise_delivery_errors = true'
     end
 
+    def set_dev_mail_delivery_method
+      inject_into_file(
+          "config/environments/development.rb",
+          "\n  config.action_mailer.delivery_method = :letter_opener",
+          after: "config.action_mailer.raise_delivery_errors = true",
+      )
+    end
+
     def use_mysql_config_template
       template 'mysql_database.yml.erb', 'config/database.yml', force: true
     end

@@ -31,6 +31,14 @@ RSpec.describe "Create a new project with default config" do
                           )
   end
 
+  it "configs development to send mail using letter_opener" do
+    dev_config = IO.read("#{project_path}/config/environments/development.rb")
+
+    expect(dev_config).to match(
+                              /^ +config.action_mailer.delivery_method = :letter_opener/,
+                          )
+  end
+
   it "adds support file for action mailer" do
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
