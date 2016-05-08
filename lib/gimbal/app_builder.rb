@@ -166,6 +166,11 @@ module Gimbal
       copy_file '_javascript.html.haml', 'app/views/application/_javascript.html.haml'
     end
 
+    def create_analytics_partial
+      copy_file '_analytics.html.haml',
+                'app/views/application/_analytics.html.haml'
+    end
+
     def create_application_layout
       remove_file 'app/views/layouts/application.html.erb'
       template 'gimbal_layout.html.haml.erb',

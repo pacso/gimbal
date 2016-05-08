@@ -35,6 +35,7 @@ module Gimbal
       invoke :setup_git
       invoke :setup_database
       invoke :create_github_repo
+      invoke :setup_analytics
       invoke :setup_bundler_audit
       invoke :setup_spring
     end
@@ -92,6 +93,11 @@ module Gimbal
       build :create_shared_flashes
       build :create_shared_javascripts
       build :create_application_layout
+    end
+
+    def setup_analytics
+      say 'Configure Analytics'
+      build :create_analytics_partial
     end
 
     def configure_app
