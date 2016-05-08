@@ -83,10 +83,14 @@ RSpec.describe "Create a new project with default config" do
     expect(result).to match(/^ +generate.view_specs false/)
   end
 
+  it "removes the default erb layout" do
+    expect(File).not_to exist("#{project_path}/app/views/layouts/application.html.erb")
+  end
+
   it "configures language in html element" do
-    layout_path = "/app/views/layouts/application.html.erb"
+    layout_path = "/app/views/layouts/application.html.haml"
     layout_file = IO.read("#{project_path}#{layout_path}")
-    expect(layout_file).to match(/<html lang="en">/)
+    expect(layout_file).to match(/%html{lang: 'en'}/)
   end
 
   it "evaluates en.yml.erb" do
