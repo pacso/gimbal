@@ -90,7 +90,7 @@ RSpec.describe "Create a new project with default config" do
   it "configures language in html element" do
     layout_path = "/app/views/layouts/application.html.haml"
     layout_file = IO.read("#{project_path}#{layout_path}")
-    expect(layout_file).to match(/%html{lang: 'en'}/)
+    expect(layout_file).to match(/%html\{lang: 'en'\}/)
   end
 
   it "evaluates en.yml.erb" do
