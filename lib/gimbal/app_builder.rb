@@ -158,17 +158,17 @@ module Gimbal
     end
 
     def create_shared_flashes
-      copy_file "_flashes.html.erb", "app/views/application/_flashes.html.erb"
+      copy_file "_flashes.html.haml", "app/views/application/_flashes.html.haml"
       copy_file "flashes_helper.rb", "app/helpers/flashes_helper.rb"
     end
 
     def create_shared_javascripts
-      copy_file '_javascript.html.erb', 'app/views/application/_javascript.html.erb'
+      copy_file '_javascript.html.haml', 'app/views/application/_javascript.html.haml'
     end
 
     def create_application_layout
-      template 'gimbal_layout.html.erb.erb',
-               'app/views/layouts/application.html.erb',
+      template 'gimbal_layout.html.haml.erb',
+               'app/views/layouts/application.html.haml',
                force: true
     end
 
