@@ -167,9 +167,9 @@ module Gimbal
     end
 
     def create_application_layout
+      remove_file 'app/views/layouts/application/html/erb'
       template 'gimbal_layout.html.haml.erb',
-               'app/views/layouts/application.html.haml',
-               force: true
+               'app/views/layouts/application.html.haml'
     end
 
     def create_database
