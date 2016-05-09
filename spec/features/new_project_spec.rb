@@ -6,16 +6,16 @@ RSpec.describe 'Create a new project' do
     remove_project_directory
   end
 
-  # context 'skipping devise' do
-  #   before(:all) do
-  #     run_gimbal('--skip-devise')
-  #   end
-  #
-  #   it 'leaves the devise gem disabled' do
-  #     gemfile = IO.read("#{project_path}/Gemfile")
-  #     expect(gemfile).to match(/^\# gem "devise"$/)
-  #   end
-  # end
+  context 'skipping devise' do
+    before(:all) do
+      run_gimbal('--skip-devise')
+    end
+
+    it 'leaves the devise gem disabled' do
+      gemfile = IO.read("#{project_path}/Gemfile")
+      expect(gemfile).to match(/^\# gem "devise"$/)
+    end
+  end
 
   context 'with default config' do
     before(:all) do
