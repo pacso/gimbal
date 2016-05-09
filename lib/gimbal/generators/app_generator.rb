@@ -18,6 +18,12 @@ module Gimbal
     class_option :skip_bundle, type: :boolean, aliases: "-B", default: true,
                  desc: "Don't run bundle install"
 
+    class_option :version, type: :boolean, aliases: "-v", group: :gimbal,
+                 desc: "Show Gimbal version number and quit"
+
+    class_option :help, type: :boolean, aliases: '-h', group: :gimbal,
+                 desc: 'Show this help message and quit'
+
     def finish_template
       say 'Finishing template'
       invoke :gimbal_customisation
@@ -141,6 +147,10 @@ module Gimbal
     end
 
     protected
+
+    def self.banner
+      "gimbal #{self.arguments.map(&:usage).join(' ')} [options]"
+    end
 
     def get_builder_class
       Gimbal::AppBuilder

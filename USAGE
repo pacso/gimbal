@@ -1,0 +1,13 @@
+Description:
+    The 'gimbal' command creates a new Rails application at the path you specify.
+
+    The generated application structure is an opinionated configuration based on my
+    personal preferences.
+
+    You can find the source of this generator on GitHub: https://github.com/pacso/gimbal
+
+Example:
+    gimbal ~/Code/Ruby/weblog
+
+    This generates a Rails installation in ~/Code/Ruby/weblog.
+    See the README in the newly created application to get going.
