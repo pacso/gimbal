@@ -57,9 +57,7 @@ module Gimbal
     def setup_database
       say 'Setting up database'
 
-      # if 'mysql' == options[:database]
-      #   build :use_mysql_config_template
-      # end
+      # TODO: Add any custom DB setup here
 
       build :create_database
     end
