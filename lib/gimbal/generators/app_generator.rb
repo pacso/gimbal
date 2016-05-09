@@ -4,50 +4,50 @@ require 'rails/generators/rails/app/app_generator'
 module Gimbal
   class AppGenerator < Rails::Generators::AppGenerator
     class_option :database,
-                 type: :string,
-                 aliases: '-d',
-                 default: 'mysql',
-                 desc: "Configure for selected database (options: #{DATABASES.join("/")})"
+      type: :string,
+      aliases: '-d',
+      default: 'mysql',
+      desc: "Configure for selected database (options: #{DATABASES.join("/")})"
 
     class_option :github,
-                 type: :string,
-                 aliases: '-G',
-                 default: nil,
-                 desc: 'Create Github repository and add remote origin pointed to repo'
+      type: :string,
+      aliases: '-G',
+      default: nil,
+      desc: 'Create Github repository and add remote origin pointed to repo'
 
     class_option :skip_test_unit,
-                 type: :boolean,
-                 aliases: '-T',
-                 default: true,
-                 desc: 'Skip Test::Unit files'
+      type: :boolean,
+      aliases: '-T',
+      default: true,
+      desc: 'Skip Test::Unit files'
 
     class_option :skip_turbolinks,
-                 type: :boolean,
-                 default: true,
-                 desc: 'Skip turbolinks gem'
+      type: :boolean,
+      default: true,
+      desc: 'Skip turbolinks gem'
 
     class_option :skip_bundle,
-                 type: :boolean,
-                 aliases: '-B',
-                 default: true,
-                 desc: "Don't run bundle install"
+      type: :boolean,
+      aliases: '-B',
+      default: true,
+      desc: "Don't run bundle install"
 
     class_option :skip_devise,
-                 type: :boolean,
-                 default: false,
-                 desc: 'Skip devise gem and setup'
+      type: :boolean,
+      default: false,
+      desc: 'Skip devise gem and setup'
 
     class_option :version,
-                 type: :boolean,
-                 aliases: '-v',
-                 group: :gimbal,
-                 desc: 'Show Gimbal version number and quit'
+      type: :boolean,
+      aliases: '-v',
+      group: :gimbal,
+      desc: 'Show Gimbal version number and quit'
 
     class_option :help,
-                 type: :boolean,
-                 aliases: '-h',
-                 group: :gimbal,
-                 desc: 'Show this help message and quit'
+      type: :boolean,
+      aliases: '-h',
+      group: :gimbal,
+      desc: 'Show this help message and quit'
 
     def finish_template
       say 'Finishing template'
