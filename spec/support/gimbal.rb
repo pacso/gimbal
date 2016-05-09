@@ -20,6 +20,16 @@ module GimbalTestHelpers
     end
   end
 
+  def gimbal_help_command
+    Dir.chdir(tmp_path) do
+      Bundler.with_clean_env do
+        `
+        #{gimbal_bin} -h
+        `
+      end
+    end
+  end
+
   def setup_app_dependencies
     if File.exist?(project_path)
       Dir.chdir(project_path) do
@@ -46,6 +56,10 @@ module GimbalTestHelpers
 
   def project_path
     @project_path ||= Pathname.new("#{tmp_path}/#{APP_NAME}")
+  end
+
+  def usage_file
+    @usage_path ||= File.join(root_path, "USAGE")
   end
 
   private
