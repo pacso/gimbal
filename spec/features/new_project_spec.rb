@@ -104,7 +104,9 @@ RSpec.describe 'Create a new project' do
     end
 
     it 'removes the default erb layout' do
-      expect(File).not_to exist("#{project_path}/app/views/layouts/application.html.erb")
+      expect(File).not_to exist(
+        "#{project_path}/app/views/layouts/application.html.erb"
+      )
     end
 
     it 'configures language in html element' do
