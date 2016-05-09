@@ -75,9 +75,9 @@ RSpec.describe 'Create a new project' do
     it 'configs bullet gem in development' do
       dev_config = IO.read("#{project_path}/config/environments/development.rb")
 
-      expect(dev_config).to match /^ +Bullet.enable = true$/
-      expect(dev_config).to match /^ +Bullet.bullet_logger = true$/
-      expect(dev_config).to match /^ +Bullet.rails_logger = true$/
+      expect(dev_config).to match(/^ +Bullet.enable = true$/)
+      expect(dev_config).to match(/^ +Bullet.bullet_logger = true$/)
+      expect(dev_config).to match(/^ +Bullet.rails_logger = true$/)
     end
 
     it 'enables the devise gem' do
