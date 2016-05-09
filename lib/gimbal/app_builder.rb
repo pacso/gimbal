@@ -173,7 +173,7 @@ module Gimbal
                        "\n         :confirmable, :lockable, :timeoutable,",
                        after: 'devise :database_authenticatable, :registerable,'
 
-      devise_migration = Dir["db/migrate/*devise_create*.rb"].first
+      devise_migration = Dir['db/migrate/*devise_create*.rb'].first
 
       uncomment_lines(devise_migration, 't.string   :confirmation_token')
       uncomment_lines(devise_migration, 't.datetime :confirmed_at')
