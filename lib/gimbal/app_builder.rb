@@ -41,6 +41,7 @@ module Gimbal
 
     def add_bullet_gem_configuration
       config = <<-RUBY
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.bullet_logger = true
@@ -72,6 +73,7 @@ module Gimbal
       generate.javascript_engine false
       generate.request_specs false
       generate.routing_specs false
+      generate.skip_routes true
       generate.stylesheets false
       generate.test_framework :rspec
       generate.view_specs false
@@ -80,6 +82,10 @@ module Gimbal
       RUBY
 
       inject_into_class 'config/application.rb', 'Application', config
+    end
+
+    def enable_devise_gem
+      uncomment_lines('Gemfile', 'gem "devise"')
     end
 
     def configure_i18n_for_missing_translations
@@ -120,7 +126,7 @@ module Gimbal
     end
 
     def generate_rspec
-      generate 'rspec:install'
+      bundle_command 'exec rails generate rspec:install'
     end
 
     def configure_puma
@@ -154,14 +160,38 @@ module Gimbal
     end
 
     def install_devise
-      generate 'devise:install'
+      bundle_command 'exec rails generate devise:install'
     end
 
     def generate_devise_model
-      generate 'devise User'
+      bundle_command 'exec rails generate devise User'
+      bundle_command 'exec rails generate devise:views'
     end
 
     def configure_devise
+      inject_into_file 'app/models/user.rb',
+                       "\n         :confirmable, :lockable, :timeoutable,",
+                       after: 'devise :database_authenticatable, :registerable,'
+
+      devise_migration_script = Dir["db/migrate/*devise_create*.rb"].first
+
+      uncomment_lines(devise_migration_script, 't.string   :confirmation_token')
+      uncomment_lines(devise_migration_script, 't.datetime :confirmed_at')
+      uncomment_lines(devise_migration_script, 't.datetime :confirmation_sent_at')
+      uncomment_lines(devise_migration_script, 't.string   :unconfirmed_email # Only if using reconfirmable')
+
+      uncomment_lines(devise_migration_script, 't.integer  :failed_attempts, default: 0, null: false')
+      uncomment_lines(devise_migration_script, 't.string   :unlock_token')
+      uncomment_lines(devise_migration_script, 't.datetime :locked_at')
+
+      uncomment_lines(devise_migration_script, 'add_index :users, :confirmation_token,   unique: true')
+      uncomment_lines(devise_migration_script, 'add_index :users, :unlock_token,         unique: true')
+
+      inject_into_file(
+        "config/environments/development.rb",
+        "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }\n",
+        after: "config.action_mailer.delivery_method = :letter_opener\n",
+      )
     end
 
     def create_partials_directory
@@ -189,7 +219,21 @@ module Gimbal
     end
 
     def create_database
-      bundle_command 'exec rake db:create db:migrate'
+      bundle_command 'exec rake db:create'
+    end
+
+    def migrate_database
+      bundle_command 'exec rake db:migrate'
+    end
+
+    def generate_homepage
+      bundle_command 'exec rails generate controller pages homepage'
+
+      inject_into_file(
+        'config/routes.rb',
+        "\n  root to: 'pages#homepage'",
+        after: 'devise_for :users'
+      )
     end
 
     def configure_time_formats

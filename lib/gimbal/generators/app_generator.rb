@@ -72,6 +72,8 @@ add remote origin pointed to repo'
       invoke :setup_analytics
       invoke :setup_bundler_audit
       invoke :setup_spring
+      invoke :migrate_database
+      invoke :generate_basic_homepage
     end
 
     def customise_gemfile
@@ -79,7 +81,13 @@ add remote origin pointed to repo'
       build :replace_gemfile
       build :set_ruby_to_version_being_used
 
+      build :enable_devise_gem unless options[:skip_devise]
+
       bundle_command 'install'
+    end
+
+    def generate_basic_homepage
+      build :generate_homepage
     end
 
     def setup_database
@@ -90,10 +98,12 @@ add remote origin pointed to repo'
       build :create_database
     end
 
+    def migrate_database
+      build :migrate_database
+    end
+
     def setup_devise
-      if options[:skip_devise]
-        say 'Skipping Devise Installation'
-      else
+      if !options[:skip_devise]
         say 'Setting up Devise'
 
         build :install_devise
