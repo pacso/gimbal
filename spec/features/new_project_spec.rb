@@ -42,16 +42,16 @@ RSpec.describe 'Create a new project' do
       dev_config = IO.read("#{project_path}/config/environments/development.rb")
 
       expect(dev_config).to match(
-                              /^ +config.action_mailer.raise_delivery_errors = true$/,
-                            )
+        /^ +config.action_mailer.raise_delivery_errors = true$/,
+      )
     end
 
     it 'configs development to send mail using letter_opener' do
       dev_config = IO.read("#{project_path}/config/environments/development.rb")
 
       expect(dev_config).to match(
-                              /^ +config.action_mailer.delivery_method = :letter_opener/,
-                            )
+        /^ +config.action_mailer.delivery_method = :letter_opener/,
+      )
     end
 
     it 'configs development to raise on missing translations' do
