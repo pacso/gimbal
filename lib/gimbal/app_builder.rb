@@ -173,19 +173,19 @@ module Gimbal
                        "\n         :confirmable, :lockable, :timeoutable,",
                        after: 'devise :database_authenticatable, :registerable,'
 
-      devise_migration_script = Dir["db/migrate/*devise_create*.rb"].first
+      devise_migration = Dir["db/migrate/*devise_create*.rb"].first
 
-      uncomment_lines(devise_migration_script, 't.string   :confirmation_token')
-      uncomment_lines(devise_migration_script, 't.datetime :confirmed_at')
-      uncomment_lines(devise_migration_script, 't.datetime :confirmation_sent_at')
-      uncomment_lines(devise_migration_script, 't.string   :unconfirmed_email # Only if using reconfirmable')
+      uncomment_lines(devise_migration, 't.string   :confirmation_token')
+      uncomment_lines(devise_migration, 't.datetime :confirmed_at')
+      uncomment_lines(devise_migration, 't.datetime :confirmation_sent_at')
+      uncomment_lines(devise_migration, 't.string   :unconfirmed_email')
 
-      uncomment_lines(devise_migration_script, 't.integer  :failed_attempts, default: 0, null: false')
-      uncomment_lines(devise_migration_script, 't.string   :unlock_token')
-      uncomment_lines(devise_migration_script, 't.datetime :locked_at')
+      uncomment_lines(devise_migration, 't.integer  :failed_attempts')
+      uncomment_lines(devise_migration, 't.string   :unlock_token')
+      uncomment_lines(devise_migration, 't.datetime :locked_at')
 
-      uncomment_lines(devise_migration_script, 'add_index :users, :confirmation_token,   unique: true')
-      uncomment_lines(devise_migration_script, 'add_index :users, :unlock_token,         unique: true')
+      uncomment_lines(devise_migration, 'add_index :users, :confirmation_token')
+      uncomment_lines(devise_migration, 'add_index :users, :unlock_token')
 
       inject_into_file(
         "config/environments/development.rb",
