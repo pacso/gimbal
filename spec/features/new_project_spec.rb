@@ -13,9 +13,7 @@ RSpec.describe 'Create a new project' do
 
     it 'leaves the devise gem disabled' do
       gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(
-                           /^\# gem "devise"$/
-                         )
+      expect(gemfile).to match(/^\# gem "devise"$/)
     end
   end
 
@@ -36,8 +34,8 @@ RSpec.describe 'Create a new project' do
       test_config = IO.read("#{project_path}/config/environments/test.rb")
 
       expect(test_config).to match(
-                               /^ +config.assets.raise_runtime_errors = true$/,
-                             )
+        /^ +config.assets.raise_runtime_errors = true$/
+      )
     end
 
     it 'configs raise_on_delivery errors in development' do
