@@ -103,7 +103,7 @@ add remote origin pointed to repo'
     end
 
     def setup_devise
-      if !options[:skip_devise]
+      unless options[:skip_devise]
         say 'Setting up Devise'
 
         build :install_devise
