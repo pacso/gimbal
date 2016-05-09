@@ -60,7 +60,7 @@ RSpec.describe 'Create a new project' do
       dev_config = IO.read("#{project_path}/config/environments/development.rb")
 
       expect(dev_config).to match(
-        /^ +config.action_view.raise_on_missing_translations = true/,
+        /^ +config.action_view.raise_on_missing_translations = true/
       )
     end
 
