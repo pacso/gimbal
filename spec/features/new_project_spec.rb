@@ -80,15 +80,15 @@ RSpec.describe 'Create a new project' do
 
     it 'enables the devise gem' do
       gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match /^gem "devise"$/
+      expect(gemfile).to match(/^gem "devise"$/)
     end
 
     it 'raises on unpermitted parameters in all environments' do
       result = IO.read("#{project_path}/config/application.rb")
 
       expect(result).to match(
-                          /^ +config.action_controller.action_on_unpermitted_parameters = :raise$/
-                        )
+        /^ +config.action_controller.action_on_unpermitted_parameters = :raise$/
+      )
     end
 
     it 'configures generators' do
