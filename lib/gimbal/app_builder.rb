@@ -153,6 +153,18 @@ module Gimbal
       copy_file "spec_helper.rb", "spec/spec_helper.rb"
     end
 
+    def install_devise
+      generate 'devise:install'
+    end
+
+    def generate_devise_model
+      generate 'devise User'
+    end
+
+    def configure_devise
+
+    end
+
     def create_partials_directory
       empty_directory 'app/views/application'
     end

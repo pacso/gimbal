@@ -40,6 +40,7 @@ module Gimbal
       invoke :configure_app
       invoke :setup_git
       invoke :setup_database
+      invoke :setup_devise
       invoke :create_github_repo
       invoke :setup_analytics
       invoke :setup_bundler_audit
@@ -60,6 +61,14 @@ module Gimbal
       # TODO: Add any custom DB setup here
 
       build :create_database
+    end
+
+    def setup_devise
+      say 'Setting up Devise'
+
+      build :install_devise
+      build :generate_devise_model
+      build :configure_devise
     end
 
     def setup_development_environment
