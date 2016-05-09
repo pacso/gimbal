@@ -18,6 +18,9 @@ module Gimbal
     class_option :skip_bundle, type: :boolean, aliases: "-B", default: true,
                  desc: "Don't run bundle install"
 
+    class_option :skip_devise, type: :boolean, default: false,
+                 desc: "Skip devise gem and setup"
+
     class_option :version, type: :boolean, aliases: "-v", group: :gimbal,
                  desc: "Show Gimbal version number and quit"
 
@@ -64,11 +67,15 @@ module Gimbal
     end
 
     def setup_devise
-      say 'Setting up Devise'
+      if options[:skip_devise]
+        say 'Skipping Devise Installation'
+      else
+        say 'Setting up Devise'
 
-      build :install_devise
-      build :generate_devise_model
-      build :configure_devise
+        build :install_devise
+        build :generate_devise_model
+        build :configure_devise
+      end
     end
 
     def setup_development_environment
