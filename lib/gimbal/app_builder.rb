@@ -162,7 +162,6 @@ module Gimbal
     end
 
     def configure_devise
-
     end
 
     def create_partials_directory
