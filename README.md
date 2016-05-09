@@ -1,4 +1,5 @@
-# gimbal [![Build Status](https://travis-ci.org/pacso/gimbal.svg?branch=master)](https://travis-ci.org/pacso/gimbal) [![Gem Version](https://badge.fury.io/rb/gimbal.svg)](https://badge.fury.io/rb/gimbal) [![Gem Version](https://badge.fury.io/rb/gimbal.svg)](https://badge.fury.io/rb/gimbal)
+# gimbal [![Build Status](https://travis-ci.org/pacso/gimbal.svg?branch=master)](https://travis-ci.org/pacso/gimbal) [![Gem Version](https://badge.fury.io/rb/gimbal.svg)](https://badge.fury.io/rb/gimbal) [![Dependency Status](https://gemnasium.com/badges/github.com/pacso/gimbal.svg)](https://gemnasium.com/github.com/pacso/gimbal)
+
 
 Gimbal is the base Rails application I use when starting new projects. It was mostly copied from thoughtbot's Suspenders project, but modified for my needs.
 
