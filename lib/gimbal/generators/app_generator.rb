@@ -8,13 +8,14 @@ module Gimbal
                  aliases: '-d',
                  default: 'mysql',
                  desc: "Configure for selected database
-(options: #{DATABASES.join("/")})"
+(options: #{DATABASES.join('/')})"
 
     class_option :github,
                  type: :string,
                  aliases: '-G',
                  default: nil,
-                 desc: 'Create Github repository and add remote origin pointed to repo'
+                 desc: 'Create Github repository and
+add remote origin pointed to repo'
 
     class_option :skip_test_unit,
                  type: :boolean,
