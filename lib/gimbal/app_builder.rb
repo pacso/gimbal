@@ -219,7 +219,7 @@ module Gimbal
     end
 
     def create_database
-      bundle_command 'exec rake db:create'
+      bundle_command 'exec rake db:create db:migrate'
     end
 
     def migrate_database
