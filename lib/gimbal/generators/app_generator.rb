@@ -53,8 +53,13 @@ add remote origin pointed to repo'
 
     def finish_template
       say 'Finishing template'
+      invoke :stop_spring
       invoke :gimbal_customisation
       super
+    end
+
+    def stop_spring
+      run('spring stop')
     end
 
     def gimbal_customisation
