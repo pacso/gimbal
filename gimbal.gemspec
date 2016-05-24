@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.description = <<-HERE
 Based on Suspenders from thoughtbot, Gimbal is a base Rails project I use
-to streamline the beginning of my Rails apps.
+to streamline the beginning of my Rails projects.
   HERE
 
   s.email = 'jon.pascoe@me.com'
@@ -26,7 +26,7 @@ to streamline the beginning of my Rails apps.
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.version = Gimbal::VERSION
 
-  s.add_dependency 'bundler', '~> 1.12'
+  s.add_dependency 'bundler', '~> 1.3'
   s.add_dependency 'rails', Gimbal::RAILS_VERSION
 
   s.add_development_dependency 'rspec', '~> 3.4'
