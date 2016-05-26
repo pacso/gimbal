@@ -83,7 +83,6 @@ add remote origin pointed to repo'
       invoke :setup_analytics
       invoke :setup_bundler_audit
       invoke :setup_spring
-      invoke :migrate_database
       invoke :generate_basic_homepage
     end
 
@@ -110,10 +109,6 @@ add remote origin pointed to repo'
       build :create_database
     end
 
-    def migrate_database
-      build :migrate_database
-    end
-
     def setup_administrate
       unless options[:skip_administrate]
         say 'Setting up Administrate'
@@ -128,6 +123,8 @@ add remote origin pointed to repo'
         build :install_devise
         build :generate_devise_model
         build :configure_devise
+
+        build :migrate_database
       end
     end
 
