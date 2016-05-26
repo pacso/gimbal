@@ -1,13 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe 'Create a new project' do
-  before(:all) do
-    drop_dummy_database
-    remove_project_directory
-  end
-
   context 'skipping devise' do
     before(:all) do
+      drop_dummy_database
+      remove_project_directory
       run_gimbal('--skip-devise')
     end
 
@@ -19,6 +16,8 @@ RSpec.describe 'Create a new project' do
 
   context 'skipping administrate' do
     before(:all) do
+      drop_dummy_database
+      remove_project_directory
       run_gimbal('--skip-administrate')
     end
 
@@ -30,6 +29,8 @@ RSpec.describe 'Create a new project' do
 
   context 'with default config' do
     before(:all) do
+      drop_dummy_database
+      remove_project_directory
       run_gimbal
     end
 
