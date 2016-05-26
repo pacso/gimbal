@@ -1,5 +1,9 @@
 master
 
+* Add administrate gem and configure for User model
+
+0.1.0 (24th May 2016)
+
 * Add devise gem and configure for User model
 * Upgrade RSpec to 3.4
 
