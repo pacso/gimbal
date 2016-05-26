@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 RSpec.describe 'Create a new project' do
+  before(:all) do
+    drop_dummy_database
+    remove_project_directory
+  end
+
   context 'skipping devise' do
     before(:all) do
-      drop_dummy_database
-      remove_project_directory
       run_gimbal('--skip-devise')
     end
 
@@ -14,10 +17,19 @@ RSpec.describe 'Create a new project' do
     end
   end
 
+  context 'skipping administrate' do
+    before(:all) do
+      run_gimbal('--skip-administrate')
+    end
+
+    it 'leaves the administrate gem disabled' do
+      gemfile = IO.read("#{project_path}/Gemfile")
+      expect(gemfile).to match(/^\# gem "administrate"$/)
+    end
+  end
+
   context 'with default config' do
     before(:all) do
-      drop_dummy_database
-      remove_project_directory
       run_gimbal
     end
 
@@ -75,6 +87,11 @@ RSpec.describe 'Create a new project' do
       expect(dev_config).to match(/^ +Bullet.enable = true$/)
       expect(dev_config).to match(/^ +Bullet.bullet_logger = true$/)
       expect(dev_config).to match(/^ +Bullet.rails_logger = true$/)
+    end
+
+    it 'enables the administrate gem' do
+      gemfile = IO.read("#{project_path}/Gemfile")
+      expect(gemfile).to match(/^gem "administrate"$/)
     end
 
     it 'enables the devise gem' do

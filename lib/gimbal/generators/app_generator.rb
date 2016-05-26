@@ -34,6 +34,11 @@ add remote origin pointed to repo'
                  default: true,
                  desc: "Don't run bundle install"
 
+    class_option :skip_administrate,
+                 type: :boolean,
+                 default: false,
+                 desc: 'Skip administrate gem and setup'
+
     class_option :skip_devise,
                  type: :boolean,
                  default: false,
@@ -73,6 +78,7 @@ add remote origin pointed to repo'
       invoke :setup_git
       invoke :setup_database
       invoke :setup_devise
+      invoke :setup_administrate
       invoke :create_github_repo
       invoke :setup_analytics
       invoke :setup_bundler_audit
@@ -86,6 +92,7 @@ add remote origin pointed to repo'
       build :replace_gemfile
       build :set_ruby_to_version_being_used
 
+      build :enable_administrate_gem unless options[:skip_administrate]
       build :enable_devise_gem unless options[:skip_devise]
 
       bundle_command 'install'
@@ -105,6 +112,13 @@ add remote origin pointed to repo'
 
     def migrate_database
       build :migrate_database
+    end
+
+    def setup_administrate
+      unless options[:skip_administrate]
+        say 'Setting up Administrate'
+        build :install_administrate
+      end
     end
 
     def setup_devise
