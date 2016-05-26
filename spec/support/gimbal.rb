@@ -13,7 +13,6 @@ module GimbalTestHelpers
     Dir.chdir(tmp_path) do
       Bundler.with_clean_env do
         add_fakes_to_path
-        stop_spring
         `
           #{gimbal_bin} #{APP_NAME} #{arguments}
         `
@@ -53,12 +52,6 @@ module GimbalTestHelpers
 
   def add_fakes_to_path
     ENV["PATH"] = "#{support_bin}:#{ENV['PATH']}"
-  end
-
-  def stop_spring
-    `
-      spring stop
-    `
   end
 
   def project_path
