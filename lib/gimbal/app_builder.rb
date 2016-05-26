@@ -84,8 +84,12 @@ module Gimbal
       inject_into_class 'config/application.rb', 'Application', config
     end
 
+    def enable_administrate_gem
+      enable_gem 'administrate'
+    end
+
     def enable_devise_gem
-      uncomment_lines('Gemfile', 'gem "devise"')
+      enable_gem 'devise'
     end
 
     def configure_i18n_for_missing_translations
@@ -157,6 +161,10 @@ module Gimbal
       remove_file "spec/spec_helper.rb"
       copy_file "rails_helper.rb", "spec/rails_helper.rb"
       copy_file "spec_helper.rb", "spec/spec_helper.rb"
+    end
+
+    def install_administrate
+      bundle_command 'exec rails generate administrate:install'
     end
 
     def install_devise
@@ -270,6 +278,10 @@ end
     end
 
     private
+
+    def enable_gem(gem_name)
+      uncomment_lines('Gemfile', "gem \"#{gem_name}\"")
+    end
 
     def raise_on_missing_translations_in(environment)
       config = 'config.action_view.raise_on_missing_translations = true'
