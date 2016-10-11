@@ -5,7 +5,9 @@ RSpec.describe 'Create a new project' do
     before(:all) do
       drop_dummy_database
       remove_project_directory
-      run_gimbal('--skip-devise --skip-administrate')
+      run_gimbal('--skip-devise')
+      # TODO: Enable when Administrate supports Rails 5
+      # run_gimbal('--skip-devise --skip-administrate')
     end
 
     it 'leaves the devise gem disabled' do
@@ -13,10 +15,11 @@ RSpec.describe 'Create a new project' do
       expect(gemfile).to match(/^\# gem "devise"$/)
     end
 
-    it 'leaves the administrate gem disabled' do
-      gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(/^\# gem "administrate"$/)
-    end
+    # TODO: Enable when Administrate supports Rails 5
+    # it 'leaves the administrate gem disabled' do
+    #   gemfile = IO.read("#{project_path}/Gemfile")
+    #   expect(gemfile).to match(/^\# gem "administrate"$/)
+    # end
   end
 
   context 'with default config' do
@@ -82,7 +85,9 @@ RSpec.describe 'Create a new project' do
       expect(dev_config).to match(/^ +Bullet.rails_logger = true$/)
     end
 
+    # TODO: Enable when Administrate supports Rails 5
     it 'enables the administrate gem' do
+      pending
       gemfile = IO.read("#{project_path}/Gemfile")
       expect(gemfile).to match(/^gem "administrate"$/)
     end

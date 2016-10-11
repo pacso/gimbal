@@ -5,6 +5,7 @@ ruby "<%= Gimbal::RUBY_VERSION %>"
 # gem "administrate"
 # gem "airbrake"
 gem "autoprefixer-rails"
+gem "bourbon", "5.0.0.beta.6"
 gem "coffee-rails", "~> 4.1.0"
 # gem "delayed_job_active_record"
 # gem "devise"
@@ -25,7 +26,7 @@ gem "uglifier"
 
 group :development do
   gem "letter_opener"
-  gem "quiet_assets"
+  gem "listen"
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"
@@ -40,7 +41,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "i18n-tasks"
   gem "pry-rails"
-  gem "rspec-rails", "~> 3.4"
+  gem "rspec-rails", "~> 3.5.0"
 end
 
 group :test do
