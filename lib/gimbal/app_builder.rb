@@ -134,7 +134,7 @@ module Gimbal
     end
 
     def replace_default_puma_configuration
-      copy_file "puma.rb", "config/puma.rb", force: true
+      copy_file 'puma.rb', 'config/puma.rb', force: true
     end
 
     def enable_database_cleaner
