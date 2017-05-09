@@ -112,7 +112,9 @@ add remote origin pointed to repo'
       build :create_database
     end
 
-    # TODO: Enable when Administrate supports Rails 5 (commented out to prevent :invoke_all accessing this method)
+    # TODO: Enable when Administrate supports Rails 5
+    # (commented out to prevent :invoke_all accessing this method)
+    #
     # def setup_administrate
     #   unless options[:skip_administrate]
     #     say 'Setting up Administrate'
