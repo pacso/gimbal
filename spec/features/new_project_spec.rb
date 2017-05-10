@@ -5,17 +5,12 @@ RSpec.describe 'Create a new project' do
     before(:all) do
       drop_dummy_database
       remove_project_directory
-      run_gimbal('--skip-devise --skip-administrate')
+      run_gimbal('--skip-devise')
     end
 
     it 'leaves the devise gem disabled' do
       gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(/^\# gem "devise"$/)
-    end
-
-    it 'leaves the administrate gem disabled' do
-      gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(/^\# gem "administrate"$/)
+      expect(gemfile).to match(/^# gem "devise"/)
     end
   end
 
@@ -82,14 +77,9 @@ RSpec.describe 'Create a new project' do
       expect(dev_config).to match(/^ +Bullet.rails_logger = true$/)
     end
 
-    it 'enables the administrate gem' do
-      gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(/^gem "administrate"$/)
-    end
-
     it 'enables the devise gem' do
       gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(/^gem "devise"$/)
+      expect(gemfile).to match(/^gem "devise"/)
     end
 
     it 'raises on unpermitted parameters in all environments' do
