@@ -27,8 +27,7 @@ to streamline the beginning of my Rails projects.
   s.version = Gimbal::VERSION
 
   s.add_dependency 'bundler', '~> 1.3'
-  s.add_dependency 'spring'
   s.add_dependency 'rails', Gimbal::RAILS_VERSION
 
-  s.add_development_dependency 'rspec', '~> 3.4'
+  s.add_development_dependency 'rspec', '~> 3.6'
 end
