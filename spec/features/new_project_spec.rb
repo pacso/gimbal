@@ -10,7 +10,7 @@ RSpec.describe 'Create a new project' do
 
     it 'leaves the devise gem disabled' do
       gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(%r{^\# gem "devise"})
+      expect(gemfile).to match(/^# gem "devise"/)
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe 'Create a new project' do
 
     it 'enables the devise gem' do
       gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(%r{^gem "devise"})
+      expect(gemfile).to match(/^gem "devise"/)
     end
 
     it 'raises on unpermitted parameters in all environments' do
