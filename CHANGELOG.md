@@ -1,40 +1,60 @@
-master
+# Change Log
+All notable changes to this project will be documented in this file.
 
-0.1.0 (24th May 2016)
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
 
-* Add devise gem and configure for User model
-* Upgrade RSpec to 3.4
+## [Unreleased]
+### Changed
+- Rails version updated to 5.1
 
-0.0.6 (9th May 2016)
+## [0.1.0] - 2016-05-24
 
-* Add test coverage for help output
+### Added
+- Devise gem, configured for User model
 
-0.0.5 (9th May 2016)
+### Changed
+- Upgrade RSpec to 3.4
 
-* Make help output specific to Gimbal rather than Rails
-* Enable analytics with Segment
-* Use HAML templates
+## [0.0.6] - 2016-05-09
 
-0.0.4 (9th May 2016)
+### Added
+- Test coverage for help output
 
-* Fix travis ruby version
-* Make Rails version requirements less pessimistic
-* Use RACK_ENV instead of RAILS_ENV
-* Increase ruby version to 2.2.4
-* Fix GitHub spec
-* Ignore JetBrains workspaces
+## [0.0.5] - 2016-05-09
 
-0.0.3 (1st December 2015)
+### Added
+- Analytics with Segment
 
-* Add letter_opener gem
-* Add action mailer test helper
-* Copy various templates and gems from Suspenders
+### Changed
+- Make help output specific to Gimbal rather than Rails
+- Switch from ERB to HAML templates
 
-0.0.2 (1st December 2015)
+## [0.0.4] - 2016-05-09
 
-* Setup basic application generator
+### Changed
+- Make Rails version requirements less pessimistic
+- Use RACK_ENV instead of RAILS_ENV
+- Increase ruby version to 2.2.4
+- Ignore JetBrains workspaces
 
-0.0.1 (1st December 2015)
+### Fixed
+- Travis ruby version
+- Fix GitHub spec
 
-* Initial build to secure gem name
+## [0.0.3] - 2015-12-01
 
+### Added
+- Letter_opener gem
+- Action mailer test helper
+- Various templates and gems transferred from Suspenders
+
+## [0.0.2] - 2015-12-01
+
+### Added
+- Setup basic application generator
+
+## [0.0.1] - 2015-12-01
+
+### Added
+- Initial build to secure gem name
