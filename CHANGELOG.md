@@ -4,9 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.3.0] - 2017-05-10
 ### Changed
 - Rails version updated to 5.1
+- Ruby version updated to 2.3.3
+
+### Removed
+- Administrate gem. It just isn't ready enough, or supported enough.
+
+## [0.2.0] - 2016-05-27
+
+### Added
+- Administrate gem
 
 ## [0.1.0] - 2016-05-24
 
