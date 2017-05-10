@@ -84,10 +84,6 @@ module Gimbal
       inject_into_class 'config/application.rb', 'Application', config
     end
 
-    def enable_administrate_gem
-      enable_gem 'administrate'
-    end
-
     def enable_devise_gem
       enable_gem 'devise'
     end
@@ -161,10 +157,6 @@ module Gimbal
       remove_file "spec/spec_helper.rb"
       copy_file "rails_helper.rb", "spec/rails_helper.rb"
       copy_file "spec_helper.rb", "spec/spec_helper.rb"
-    end
-
-    def install_administrate
-      bundle_command 'exec rails generate administrate:install'
     end
 
     def install_devise
