@@ -10,7 +10,7 @@ RSpec.describe 'Create a new project' do
 
     it 'leaves the devise gem disabled' do
       gemfile = IO.read("#{project_path}/Gemfile")
-      expect(gemfile).to match(/^\# gem "devise"$/)
+      expect(gemfile).to match(/^\# gem 'devise', git: 'https:\/\/github\.com\/plataformatec\/devise\.git'$/)
     end
   end
 
